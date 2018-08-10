@@ -3,8 +3,8 @@ import glob
 import serial
 PORT = "COM4"
 # position values
-arm_pos = 90
-base_pos = 90
+arm_pos = 30
+base_pos = 200
 # cred https://stackoverflow.com/questions/12090503/listing-available-com-ports-with-python#14224477
 def serial_ports():
     """ Lists serial port names
@@ -33,7 +33,25 @@ def serial_ports():
         except (OSError, serial.SerialException):
             pass
     return result
+s = serial.Serial(PORT,baudrate = 9600, timeout=1)
 
+def send_commands_motor(val,val2):
+	positions = '{},{}\n'.format(val,val2).encode('ascii')
+	s.write(positions)
+
+try:
+	
+
+	while 1:
+
+		arduino_output = s.readline().decode("ascii")
+		print(arduino_output)
+		send_commands_motor(arm_pos,base_pos)
+		
+
+except KeyboardInterrupt as e:
+	print("Program Closed")
+	exit()
 
 if __name__ == '__main__':
 	print("Wifi camera Motor Server\n\n")
