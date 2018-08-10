@@ -30,7 +30,7 @@ void loop() {
       //start to parse into 84 and 22 as int's
       if(inChar == '\n'){
         //https://stackoverflow.com/questions/11068450/arduino-c-language-parsing-string-with-delimiter-input-through-serial-interfa#14306981
-        Serial.println(inString);
+//        Serial.println(inString);
         int delimiterPosition  = inString.indexOf(',');
         
         if(delimiterPosition >= 0){
@@ -41,20 +41,22 @@ void loop() {
           int pos1 = servoPos1.toInt();
           int pos2 = servoPos2.toInt();
           
-          Serial.print("Pos1: ");
-          Serial.println(pos1);
-          Serial.print(", Pos2: ");
+//          Serial.print("Pos1: ");
+          Serial.print(pos1);
+          Serial.print(",");
+
+//          Serial.print(", Pos2: ");
           Serial.println(pos2);
           
-          Serial.println("Steps:");
+//          Serial.println("Steps:");
           for(int i = 0; i <= pos1; i +=1){
             baseMotor.step(1);
-            Serial.print(".");
+//            Serial.print(".");
               delay(20);
           }
           for(int i = 0; i <= pos2; i +=1){
             antMotor.step(1);
-            Serial.print(".");
+//            Serial.print(".");
               delay(20);
           }
         }
