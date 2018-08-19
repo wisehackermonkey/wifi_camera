@@ -1,3 +1,5 @@
+
+
 var img_data = [[255,1,255,1,255,1,255,1,255,1,255,1,255,1,255,1,255,1,255,1,255,1,255,1],
 [255,1,255,1,255,1,255,1,255,1,255,1,255,1,255,1,255,1,255,1,255,1,255,1],
 [255,1,255,1,255,1,255,1,255,1,255,1,255,1,255,1,255,1,255,1,255,1,255,1]];
@@ -7,8 +9,7 @@ function setup() {
   //setup
   createCanvas(600,600);
   background(50);
-  // img = createImage(400,400);
- 
+  
   for(var x = 0; x < 0; x++) {
     for(var y = 0; y < 0; y++) {
   // for(var i = startx, endx)
@@ -20,16 +21,6 @@ function setup() {
       }
     }
   
-  
-  
-  // img.loadPixels();
-  // for(var x = 0; x < img.width; x++) {
-  //   for(var y = 0; y < img.height; y++) {
-  //     var r = map(y, 0, img.height, 255, 0);
-  //     img.set(x,y, [r,255-r,0,255]);
-  //   }   
-  // }
-  // img.updatePixels();
   img = renderImage(img_data,3,24);
 }
 
@@ -47,6 +38,7 @@ function moveRobot(x,y){
 function readSerialVal(){
   //todo
 }
+
 //todo add heatmap
 //https://www.patrick-wied.at/static/heatmapjs/
 //datastruct object, width of datastruct, height of datastruct
