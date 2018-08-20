@@ -5,6 +5,7 @@ PORT = "COM4"
 # position values
 arm_pos = 30
 base_pos = 200
+filename = "serial_data.json"
 # cred https://stackoverflow.com/questions/12090503/listing-available-com-ports-with-python#14224477
 def serial_ports():
     """ Lists serial port names
@@ -38,44 +39,52 @@ s = serial.Serial(PORT,baudrate = 9600, timeout=1)
 def send_commands_motor(val,val2):
 	positions = '{},{}\n'.format(val,val2).encode('ascii')
 	s.write(positions)
-
-try:
 	
 
-	while 1:
 
-		arduino_output = s.readline().decode("ascii")
-		print(arduino_output)
-		send_commands_motor(arm_pos,base_pos)
-		
-
-except KeyboardInterrupt as e:
-	print("Program Closed")
-	exit()
 
 if __name__ == '__main__':
 	print("Wifi camera Motor Server\n\n")
 	print(serial_ports())
-	s = serial.Serial(PORT)
+	exit = True
+	try:
+		while exit:
+
+			arduino_output = s.readline().decode("ascii")
+			print(arduino_output)
+			if 'end' in arduino_output:
+
+				with open(filename, 'w') as file:
+					file.write('{"data":['+str(arduino_output) + ']}')
+				exit = False
+				print("Exit loop")
+		print("exited")
+			# send_commands_motor(arm_pos,base_pos)
+	except KeyboardInterrupt as e:
+		print("Program Closed")
+		if s.is_open == True:
+			s.close()
+		exit()
+	# s = serial.Serial(PORT)
 	
-	acc = ""
+	# acc = ""
 	
-	for i in range(0,20):
-		acc += s.read().decode("ascii")
-	print(acc)
-	string = '{},{}\n'.format(arm_pos,base_pos)
+	# for i in range(0,20):
+	# 	acc += s.read().decode("ascii")
+	# print(acc)
+	# string = '{},{}\n'.format(arm_pos,base_pos)
 
 
-	s.write(string.encode('ascii'))
+	# s.write(string.encode('ascii'))
 	
-	for i in range(0,100):
-		acc += s.read().decode("ascii")
-		print(acc, end="")
-	print()
-	s.close()
-	print(s.is_open)
-	print(("port closed", "port open")[s.is_open == True])
+	# for i in range(0,100):
+	# 	acc += s.read().decode("ascii")
+	# 	print(acc, end="")
+	# print()
+	# s.close()
+	# print(s.is_open)
+	# print(("port closed", "port open")[s.is_open == True])
 	
-	if s.is_open == True:
-		s.close()
+	# if s.is_open == True:
+	# 	s.close()
 

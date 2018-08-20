@@ -15,6 +15,7 @@ void setup() {
        Serial.print(","); 
        delay(100);   
     }
+    Serial.println("end");
 //  }
 }
 
