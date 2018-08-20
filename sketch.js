@@ -9,7 +9,7 @@ var img;
 
 function setup() {
   //setup
-  createCanvas(600,1000);
+  createCanvas(600,600);
   background(50);
   noSmooth();
   // for(var x = 0; x < 0; x++) {
@@ -23,7 +23,7 @@ function setup() {
   //     }
   //   }
     
-  img = imageRender(serial.data,1,serial['data'][0].length);
+  img = imageRender(serial.data,serial['data'].length,serial['data'][0].length);
 }
 
 function draw() {
