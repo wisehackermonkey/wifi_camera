@@ -2,12 +2,13 @@ import sys
 import glob
 import serial
 import json
+from pprint import pprint
 PORT = "COM4"
 # position values
 arm_pos = 30
 base_pos = 200
 filename = "serial_data.json"
-sensor = {"data":[[]]}
+sensor = {"data":[]}
 # cred https://stackoverflow.com/questions/12090503/listing-available-com-ports-with-python#14224477
 def serial_ports():
     """ Lists serial port names
@@ -49,20 +50,33 @@ if __name__ == '__main__':
 	print("Wifi camera Motor Server\n\n")
 	print(serial_ports())
 	exit = True
+	i = 0
 	try:
 		while exit:
 			arduino_output = s.readline().decode("ascii")
-			print(arduino_output)
-			if 'end' in arduino_output:
-				removeEND = arduino_output.replace(",end","")
-				splitData = removeEND.split(",")
-				sensor["data"][0] = splitData
-				print(str(sensor) )
-
+			if '\n' in arduino_output:
+				arduino_output = arduino_output.replace(',\n','')
+				sensor["data"].append(arduino_output.split(","))
+				pprint(sensor)
+			elif 'end' in arduino_output:
+				exit = False
+				if s.is_open == True:
+					s.close()
 				with open(filename, 'w') as file:
 				 	file.write(json.dumps(sensor))
-				exit = False
 				print("Exit loop")
+			# if 'end' in arduino_output:
+			# 	removeEND = arduino_output.replace(",","")
+			# 	splitData = removeEND.split(",")
+			# 	sensor["data"][0] = splitData
+			# 	print(str(sensor) )
+
+			# 	with open(filename, 'w') as file:
+			# 	 	file.write(json.dumps(sensor))
+			# 	exit = False
+			# 	if s.is_open == True:
+			# 		s.close()
+			# 	print("Exit loop")
 		print("exited")
 			# send_commands_motor(arm_pos,base_pos)
 	except KeyboardInterrupt as e:
