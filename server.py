@@ -55,7 +55,8 @@ if __name__ == '__main__':
 			if 'end' in arduino_output:
 
 				with open(filename, 'w') as file:
-					file.write('{"data":['+str(arduino_output) + ']}')
+					formated = arduino_output.replace(",end","")
+					file.write('{{"data":[[{0}]]}}'.format(formated))
 				exit = False
 				print("Exit loop")
 		print("exited")

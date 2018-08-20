@@ -23,7 +23,7 @@ function setup() {
   //     }
   //   }
     
-  img = imageRender(serial.data,3,24);
+  img = imageRender(serial.data,1,serial.data[0].length);
 }
 
 function draw() {
@@ -58,7 +58,7 @@ function imageRender(d, w,h){
       
       //color
       var c = d[x][y];
-      
+       c = map(c,276,650,1,255);
       //x,y position, r,g,b values, alpha(aka opasity)
       i.set(x,y, [c, c,c,255]);
     }   

@@ -13,9 +13,9 @@ void setup() {
        int val = analogRead(sensorPin); 
        Serial.print(val);
        Serial.print(","); 
-       delay(100);   
+       delay(50);   
     }
-    Serial.println("end");
+    Serial.print("end");
 //  }
 }
 
