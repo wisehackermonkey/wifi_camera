@@ -57,7 +57,8 @@ if __name__ == '__main__':
 			if '\n' in arduino_output:
 				arduino_output = arduino_output.replace(',\n','')
 				sensor["data"].append(arduino_output.split(","))
-				pprint(sensor)
+				# pprint(sensor)
+				print(".",end="")
 			elif 'end' in arduino_output:
 				exit = False
 				if s.is_open == True:

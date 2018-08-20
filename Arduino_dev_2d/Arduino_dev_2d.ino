@@ -3,8 +3,8 @@
 */
 
 const int sensorPin = A0;
-const int w = 10; 
-const int h = 10; 
+const int w = 100; 
+const int h = 15; 
 
 void setup() {
   // initialize serial:
@@ -16,8 +16,8 @@ void setup() {
      int val = analogRead(sensorPin); 
      output += String(val);
      output += ","; 
-     delay(10);   
-    }
+     delay(10);  
+    } 
     output+="\n";
   }
 
