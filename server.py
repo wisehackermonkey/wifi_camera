@@ -1,11 +1,13 @@
 import sys
 import glob
 import serial
+import json
 PORT = "COM4"
 # position values
 arm_pos = 30
 base_pos = 200
 filename = "serial_data.json"
+sensor = {"data":[[]]}
 # cred https://stackoverflow.com/questions/12090503/listing-available-com-ports-with-python#14224477
 def serial_ports():
     """ Lists serial port names
@@ -49,14 +51,16 @@ if __name__ == '__main__':
 	exit = True
 	try:
 		while exit:
-
 			arduino_output = s.readline().decode("ascii")
 			print(arduino_output)
 			if 'end' in arduino_output:
+				removeEND = arduino_output.replace(",end","")
+				splitData = removeEND.split(",")
+				sensor["data"][0] = splitData
+				print(str(sensor) )
 
 				with open(filename, 'w') as file:
-					formated = arduino_output.replace(",end","")
-					file.write('{{"data":[[{0}]]}}'.format(formated))
+				 	file.write(json.dumps(sensor))
 				exit = False
 				print("Exit loop")
 		print("exited")

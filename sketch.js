@@ -9,9 +9,9 @@ var img;
 
 function setup() {
   //setup
-  createCanvas(600,600);
+  createCanvas(600,1000);
   background(50);
-  
+  noSmooth();
   // for(var x = 0; x < 0; x++) {
   //   for(var y = 0; y < 0; y++) {
   // // for(var i = startx, endx)
@@ -23,7 +23,7 @@ function setup() {
   //     }
   //   }
     
-  img = imageRender(serial.data,1,serial.data[0].length);
+  img = imageRender(serial.data,1,serial['data'][0].length);
 }
 
 function draw() {
@@ -58,7 +58,7 @@ function imageRender(d, w,h){
       
       //color
       var c = d[x][y];
-       c = map(c,276,650,1,255);
+       c = map(c,220,370,1,255);
       //x,y position, r,g,b values, alpha(aka opasity)
       i.set(x,y, [c, c,c,255]);
     }   
