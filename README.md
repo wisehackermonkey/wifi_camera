@@ -1,5 +1,6 @@
 # wifi camera project
-v1.0.0
+radio telescope that makes a image of wifi signal strength
+##### v1.0.0
 ```
 wisemonkey
 20180809
